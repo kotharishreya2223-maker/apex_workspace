@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Conversations | Apex Workspace</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="brand-container">
+            <img src="logo.png" alt="ApexWorkspace" class="brand-logo-img" onerror="this.src='https://via.placeholder.com/120x40/6366f1/ffffff?text=ApexWorkspace'">
+            <h2>Client Discussion Portal</h2>
+        </div>
+
+        <nav class="admin-nav-links" id="adminNavLinks">
+            <a href="admin-dashboard.html">Overview</a>
+            <a href="employees.html">Employee Provisioning</a>
+            <a href="chats.html" class="active">Client Chats</a>
+        </nav>
+
+        <div class="user-profile">
+            <span>Logged in: <strong id="userProfileName">User</strong></span>
+            <button onclick="logout()" class="btn-logout">Logout</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="dashboard-panel">
+            <div class="panel-header">
+                <h3>💬 Live Client Deals & Discussion Threads</h3>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Client Name</th>
+                        <th>Assigned Manager</th>
+                        <th>Deal Value</th>
+                        <th>Payment Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="chatsTableBody">
+                    <!-- Populated by script.js -->
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

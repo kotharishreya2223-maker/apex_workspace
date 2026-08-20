@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Provisioning | Apex Workspace</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="brand-container">
+            <img src="logo.png" alt="ApexWorkspace" class="brand-logo-img" onerror="this.src='https://via.placeholder.com/120x40/6366f1/ffffff?text=ApexWorkspace'">
+            <h2>Employee Management</h2>
+        </div>
+
+        <nav class="admin-nav-links" id="adminNavLinks">
+            <a href="admin-dashboard.html">Overview</a>
+            <a href="employees.html" class="active">Employee Provisioning</a>
+            <a href="chats.html">Client Chats</a>
+        </nav>
+
+        <div class="user-profile">
+            <span>Logged in: <strong id="userProfileName">Super Admin</strong></span>
+            <button onclick="logout()" class="btn-logout">Logout</button>
+        </div>
+    </header>
+
+    <div class="container layout-two-column">
+        <section class="dashboard-panel form-panel">
+            <h3>➕ Provision New Employee</h3>
+            <form onsubmit="createEmployee(event)">
+                <div class="form-group">
+                    <label for="empName">Full Name</label>
+                    <input type="text" id="empName" placeholder="Rahul Verma" required>
+                </div>
+                <div class="form-group">
+                    <label for="empEmail">Corporate Email</label>
+                    <input type="email" id="empEmail" placeholder="rahul@agency.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="empRole">Assigned Designation</label>
+                    <input type="text" id="empRole" placeholder="Video Editor / Ad Specialist" required>
+                </div>
+                <div class="form-group">
+                    <label for="empPass">Set Initial Password</label>
+                    <input type="password" id="empPass" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-primary full-width">Create Account</button>
+            </form>
+        </section>
+
+        <section class="dashboard-panel table-panel">
+            <div class="panel-header">
+                <h3>👥 Provisioned Staff Directory</h3>
+                <span class="badge" id="empCount">0 Employees</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="employeeAccountsTable">
+                    <!-- Populated by script.js -->
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
