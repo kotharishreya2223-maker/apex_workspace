@@ -3,15 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex Workspace - Welcome</title>
+    <title>Apex Workspace - Portal Login</title>
     <link rel="stylesheet" href="style.css">
+    
+    <!-- EmailJS SDK for sending real emails without backend -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // Replace with your EmailJS Public Key
+            emailjs.init("YOUR_PUBLIC_KEY");
+        })();
+    </script>
 </head>
-<body class="landing-page">
-    <div class="landing-box">
-        <img src="logo.png" alt="Apex Workspace" class="brand-logo-img large" onerror="this.src='https://via.placeholder.com/180x60/6366f1/ffffff?text=ApexWorkspace'">
-        <h1>Welcome to Apex Workspace</h1>
-        <p class="landing-description">Unified Enterprise Portal for Operations, Provisioning & Communications.</p>
-        <a href="login.html" class="btn-primary btn-large">Launch Portal Login</a>
+<body class="auth-page">
+    <!-- Login Form -->
+    <div class="auth-card" id="loginCard">
+        <div class="brand-container centered">
+            <img src="logo.png" alt="Apex Workspace" class="brand-logo-img" onerror="this.src='https://via.placeholder.com/150x50/6366f1/ffffff?text=ApexWorkspace'">
+            <h2>Client Portal Login</h2>
+        </div>
+
+        <form onsubmit="handleLoginSubmit(event)">
+            <div class="form-group">
+                <label for="authRole">Login Role</label>
+                <select id="authRole">
+                    <option value="employee">Employee</option>
+                    <option value="admin">Super Admin</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="authEmail">Email Address</label>
+                <input type="email" id="authEmail" placeholder="e.g. user@agency.com" required>
+            </div>
+
+            <div class="form-group">
+                <div class="label-row">
+                    <label for="authPass">Password</label>
+                    <a href="#" class="auth-link" onclick="toggleForgotPassword(true)">Forgot Password?</a>
+                </div>
+                <input type="password" id="authPass" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn-primary full-width">Sign In</button>
+        </form>
     </div>
+
+    <!-- Password Recovery Form -->
+    <div class="auth-card" id="forgotPassCard" style="display: none;">
+        <div class="brand-container centered">
+            <img src="logo.png" alt="Apex Workspace" class="brand-logo-img" onerror="this.src='https://via.placeholder.com/150x50/6366f1/ffffff?text=ApexWorkspace'">
+            <h2>Recover Credentials</h2>
+        </div>
+
+        <form onsubmit="handleForgotPasswordSubmit(event)">
+            <div class="form-group">
+                <label for="forgotRole">Account Role</label>
+                <select id="forgotRole">
+                    <option value="employee">Employee</option>
+                    <option value="admin">Super Admin</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="forgotEmail">Registered Email Address</label>
+                <input type="email" id="forgotEmail" placeholder="e.g. user@agency.com" required>
+            </div>
+
+            <button type="submit" class="btn-primary full-width" style="margin-top: 10px;">Send Credentials to Mail</button>
+            
+            <div class="form-footer" style="text-align: center; margin-top: 1rem;">
+                <a href="#" class="auth-link" onclick="toggleForgotPassword(false)">← Back to Login</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
