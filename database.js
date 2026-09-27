@@ -1,5 +1,5 @@
 import {DatabaseSync} from 'node:sqlite';
-import {mkdirSync} from 'node:fs';
+import {mkdirSync,readFileSync} from 'node:fs';
 import path from 'node:path';
 import pg from 'pg';
 
@@ -13,7 +13,8 @@ export async function openDatabase({clientFactory}={}){
   const url=new URL(process.env.DATABASE_URL);
   // Always verify the server certificate, even if the copied URL says require.
   for(const key of ['sslmode','sslcert','sslkey','sslrootcert'])url.searchParams.delete(key);
-  client=(clientFactory||((config)=>new pg.Client(config)))({connectionString:url.toString(),ssl:{rejectUnauthorized:true,...(process.env.DATABASE_CA?{ca:process.env.DATABASE_CA.replace(/\\n/g,'\n')}:{})},connectionTimeoutMillis:15000,statement_timeout:15000,query_timeout:20000});
+  const ca=process.env.DATABASE_CA?.replace(/\\n/g,'\n')||(/\.(supabase\.com|supabase\.co)$/.test(url.hostname)?readFileSync(new URL('./supabase-ca.crt',import.meta.url),'utf8'):undefined);
+  client=(clientFactory||((config)=>new pg.Client(config)))({connectionString:url.toString(),ssl:{rejectUnauthorized:true,...(ca?{ca}:{})},connectionTimeoutMillis:15000,statement_timeout:15000,query_timeout:20000});
   await client.connect();
   await client.query('CREATE SCHEMA IF NOT EXISTS apex; REVOKE ALL ON SCHEMA apex FROM PUBLIC; SET search_path TO apex;');
  }else{

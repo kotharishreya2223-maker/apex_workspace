@@ -2,7 +2,7 @@ FROM node:22-bookworm-slim
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev
-COPY server.js database.js ./
+COPY server.js database.js supabase-ca.crt ./
 COPY public ./public
 RUN mkdir -p /app/data && chown -R node:node /app
 USER node
