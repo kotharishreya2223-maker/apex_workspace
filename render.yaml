@@ -1,0 +1,25 @@
+# Free hosting only. Database is external Supabase; no paid disk.
+services:
+  - type: web
+    name: apex-client-portal
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 10000
+      - key: REQUIRE_DATABASE_URL
+        value: "true"
+      - key: DATABASE_URL
+        sync: false
+      - key: ADMIN_NAME
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false

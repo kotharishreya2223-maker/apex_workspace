@@ -1,0 +1,1 @@
+{"name":"apex-client-portal","version":"1.0.0","private":true,"type":"module","scripts":{"start":"node --env-file-if-exists=.env server.js","test":"node --test tests/*.test.js"},"engines":{"node":">=22.19.0"},"dependencies":{"pg":"^8.23.0"},"devDependencies":{"@electric-sql/pglite":"^0.5.8"}}
